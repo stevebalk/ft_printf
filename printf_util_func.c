@@ -6,27 +6,42 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:13:47 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/19 17:33:27 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/22 20:29:47 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 
+static void ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
 static void ft_putstr(char *str)
 {
 	while(*str)
 	{
-		write(1, str, 1);
+		ft_putchar(*str);
 		str++;
 	}
 }
 
-static char	*ft_putnbr_base(long nbr, char *base)
+static void ft_abs(int nbr)
 {
-	char	*rtn;
+	if (nbr < 0)
+		return (nbr * -1);
+	return (nbr);
+}
+
+size_t	ft_putnbr_base(long nbr, char *base, size_t base_size)
+{
+	size_t	rtn;
 	size_t	nbr_len;
 	int		sign;
 
-	sign = 1;
+	if (nbr / base_size != 0)
+		rtn += ft_putnbr_base(nbr / base_size, base, base_size);
+	ft_putchar(base[nbr % base_size]);
+	return (rtn + 1);
 }
