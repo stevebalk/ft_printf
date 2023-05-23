@@ -1,38 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
-
-static void ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-// static void ft_putstr(char *str)
-// {
-// 	while(*str)
-// 	{
-// 		ft_putchar(*str);
-// 		str++;
-// 	}
-// }
-
-static int ft_abs(int nbr)
-{
-	if (nbr < 0)
-		return (nbr * -1);
-	return (nbr);
-}
-
-size_t	ft_putnbr_base(size_t nbr, char *base, size_t base_size)
-{
-	size_t	rtn;
-
-	rtn = 0;
-	if (nbr / base_size != 0)
-		rtn += ft_putnbr_base(nbr / base_size, base, base_size);
-	ft_putchar(base[ft_abs(nbr) % base_size]);
-	return (rtn + 1);
-}
-
+#include "printf_util_func.c"
 
 
 int	main(void)
@@ -91,8 +59,8 @@ int	main(void)
 	fflush(stdout);
 
 	unsigned int nbr			= 33454562;
-	char *base			= "0123456789abcdef";
-	size_t base_size	= 16;
+	char *base			= "0123456789";
+	size_t base_size	= 10;
 	ft_putnbr_base(nbr, base, base_size);
 	ft_putchar('\n');
 	printf("printf(hex): %x\n", nbr);

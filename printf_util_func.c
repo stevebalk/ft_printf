@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:13:47 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/22 20:29:47 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:56:27 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,20 @@ static void ft_putstr(char *str)
 	}
 }
 
-static void ft_abs(int nbr)
+static int ft_abs(int nbr)
 {
 	if (nbr < 0)
 		return (nbr * -1);
 	return (nbr);
 }
 
-size_t	ft_putnbr_base(long nbr, char *base, size_t base_size)
+size_t	ft_putnbr_base(size_t nbr, char *base, size_t base_size)
 {
 	size_t	rtn;
-	size_t	nbr_len;
-	int		sign;
 
+	rtn = 0;
 	if (nbr / base_size != 0)
 		rtn += ft_putnbr_base(nbr / base_size, base, base_size);
-	ft_putchar(base[nbr % base_size]);
+	ft_putchar(base[ft_abs(nbr) % base_size]);
 	return (rtn + 1);
 }
