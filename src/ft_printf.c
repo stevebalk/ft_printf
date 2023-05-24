@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:48:12 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/24 17:32:09 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/25 00:43:31 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_printf(const char *str, ...)
 {
 	t_print *tab;
 	int ret;
-	size_t i;
 
 	tab = (t_print *)calloc(sizeof(t_print), 1);
 	if (tab == NULL)
@@ -31,7 +30,8 @@ int	ft_printf(const char *str, ...)
 		else
 		{
 			str = ft_eval_format(tab, str + 1);
-			ft_choose_print_func(str + i, tab);
+			ft_choose_print_func(str++, tab);
+			ft_reset_t_print(tab);
 		}
 	}
 	va_end(tab->args);
