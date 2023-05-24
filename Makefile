@@ -6,7 +6,7 @@
 #    By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 11:26:00 by sbalk             #+#    #+#              #
-#    Updated: 2023/05/23 11:35:54 by sbalk            ###   ########.fr        #
+#    Updated: 2023/05/23 16:37:26 by sbalk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,9 @@ CFLAGS		= -Werror -Wall -Wextra -I
 RM			= rm -f
 SRC_DIR		= src/
 OBJ_DIR		= obj/
-ar			= ar rcs
+AR			= ar rcs
 LIBFT		= libft
 INCLUDE		= include
-
-SRCS		=	ft_printf.c				\
-				ft_printf_util_func.c	\
-
-OBJS		= $(SRCS:.c=.o)
 
 # Colors
 
@@ -37,21 +32,30 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
+SRC_FILES	=	ft_printf_util
+
+SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+
+OBJF		= .cache_exists
+
 all:		$(NAME)
 
-$(NAME):	$(OBJS)
-					@make -C $(LIBFT)
-					@cp libft/libft.a .
-					@mv libft.a $(NAME)
-					@$(AR) $(NAME) $(OBJ)
-					@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
+$(NAME):	$(OBJ)
+				@make -C $(LIBFT)
+				@cp libft/libft.a .
+				@mv libft.a $(NAME)
+				@$(AR) $(NAME) $(OBJ)
+				@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+			$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJF):
+			@echo "$(OBJ_DIR) $(RED)does not exist$(DEF_COLOR)"
 			@mkdir -p $(OBJ_DIR)
+			@echo "$(OBJ_DIR) $(GREEN)created$(RED)"
 
 clean:
 			@$(RM) -rf $(OBJ_DIR)
