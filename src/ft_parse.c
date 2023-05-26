@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:20:01 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/25 23:58:25 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/26 18:45:50 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 #include "libft.h"
 #include <stdio.h>
 
-/* Check if the precision syntax is correct and return digit length
-* if it's not a valid syntax, returns 0 */
-static	size_t	parse_precision(t_print *tab, const char *str)
+static	size_t	parse_precision(t_print *f, const char *str)
 {
 	size_t	i;
 
 	i = 1;
-	tab->point = 1;
+	f->point = 1;
 	str++;
+	f->set = 0;
 	while (!ft_strchr(SPECIFIERS, *str))
 	{
-		if (!tab->precision && ft_isdigit(*str))
+		if (!f->set && ft_isdigit(*str))
 		{
-			tab->precision = (size_t) ft_atoi(str);
-			// tab->set = 1;
+			f->prec = ft_atoi(str);
+			f->set = 1;
 		}
 		str++;
 		i++;
@@ -36,13 +35,13 @@ static	size_t	parse_precision(t_print *tab, const char *str)
 	return (i);
 }
 
-static	size_t	parse_width(t_print *tab, const char *str)
+static	size_t	parse_width(t_print *f, const char *str)
 {
 	size_t	i;
 
 	i = 0;
-	tab->set = 1;
-	tab->width = ft_atoi(str);
+	f->set = 1;
+	f->width = ft_atoi(str);
 	str++;
 	while (ft_isdigit(*str))
 	{
@@ -52,42 +51,25 @@ static	size_t	parse_width(t_print *tab, const char *str)
 	return (i);
 }
 
-// static	size_t	parse_zero_padding(t_print *tab, const char *str)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	str++;
-// 	tab->zero = ft_atoi(str);
-// 	while (ft_isdigit(*str))
-// 	{
-// 		i++;
-// 		str++;
-// 	}
-// 	return (i);
-// }
-
-const char	*ft_eval_format(t_print *tab, const char *str)
+const char	*ft_eval_format(t_print *f, const char *str)
 {
 	while (!ft_strchr(SPECIFIERS, *str) && *str != '.')
 	{
 		if (*str == '-')
-			tab->left_allign = 1;
+			f->left_allign = 1;
 		else if (*str == '+')
-			tab->sign = 1;
+			f->sign = 1;
 		else if (*str == ' ')
-			tab->space = 1;
+			f->space = 1;
 		else if (*str == '#')
-			tab->hashtag = 1;
+			f->hashtag = 1;
 		else if (*str == '0' && !ft_isdigit(*(str - 1)))
-			tab->zero = 1;
-		else if (*str > '0' && *str <= '9' && !tab->set)
-			str += parse_width(tab, str);
+			f->zero = 1;
+		else if (*str > '0' && *str <= '9' && !f->set)
+			str += parse_width(f, str);
 		str++;
 	}
 	if (*str == '.')
-			str += parse_precision(tab, str);
-	printf("Precision: %lu\n", tab->precision);
-	printf("Width: %lu\n", tab->width);
+			str += parse_precision(f, str);
 	return (str);
 }

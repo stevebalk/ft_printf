@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:48:12 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/25 00:43:31 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/26 13:52:18 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_printf(const char *str, ...)
 		}
 	}
 	va_end(tab->args);
-	ret += tab->total_length;
+	ret += tab->tl;
 	free(tab);
 	return (ret);
 }
