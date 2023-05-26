@@ -6,22 +6,38 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:48:12 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/26 13:52:18 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/27 00:40:18 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
+static void	ft_choose_print_func(const char *str, t_print *f)
+{
+	f->speci = *str;
+	if (*str == 'c')
+		ft_print_char(f);
+	else if (*str == '%')
+		f->tl += write(1, "%", 1);
+	else if (*str == 'd' || *str == 'i' || *str == 'u')
+		ft_print_d_i_u(f);
+	else if (*str == 's')
+		ft_print_string(f);
+	else if (*str == 'x' || *str == 'X')
+		ft_print_hex(f);
+}
+
 int	ft_printf(const char *str, ...)
 {
-	t_print *tab;
+	t_print a;
+	t_print *f;
 	int ret;
 
-	tab = (t_print *)calloc(sizeof(t_print), 1);
-	if (tab == NULL)
-		return(-1);
-	va_start(tab->args, str);
+	f = &a;
+	ft_reset_t_print(f);
+	f->tl = 0;
+	va_start(f->args, str);
 	ret = 0;
 	while(*str)
 	{
@@ -29,13 +45,12 @@ int	ft_printf(const char *str, ...)
 			ret += write(1, str++, 1);
 		else
 		{
-			str = ft_eval_format(tab, str + 1);
-			ft_choose_print_func(str++, tab);
-			ft_reset_t_print(tab);
+			str = ft_eval_format(f, str + 1);
+			ft_choose_print_func(str++, f);
+			ft_reset_t_print(f);
 		}
 	}
-	va_end(tab->args);
-	ret += tab->tl;
-	free(tab);
+	va_end(f->args);
+	ret += f->tl;
 	return (ret);
 }

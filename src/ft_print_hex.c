@@ -6,9 +6,58 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:55 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/25 14:22:50 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/27 00:59:18 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
+
+// void	ft_print_x(t_print *f)
+// {
+
+// }
+
+static size_t	ft_puthex(size_t nbr, t_print *f)
+{
+	size_t	rtn;
+
+	rtn = 0;
+	if (nbr >= 16)
+			rtn += ft_puthex(nbr / 16, f);
+	if (f->speci == 'x')
+		ft_putchar_fd(HEXALOW[nbr % 16], 1);
+	else
+		ft_putchar_fd(HEXAUP[nbr % 16], 1);
+	return (rtn + 1);
+}
+
+static char	*hashtag(t_print *f)
+{
+	if (f->speci == 'X')
+		return ("0X");
+	return ("0x");
+}
+
+void	ft_print_hex(t_print *f)
+{
+	unsigned int	nbr;
+	int				len;
+
+	nbr = va_arg(f->args, unsigned int);
+	len = ft_nbrlen(nbr, 16);
+	if (!nbr && f->point && !f->prec)
+		len = 0;
+	if (f->hashtag)
+		f->width -= 2;
+	if (!f->left_allign && f->width > len && !f->point)
+		f->tl += ft_putnchar_fd(' ', 1, f->width - len);
+	else if (!f->left_allign && f->width > len && f->point)
+		f->tl += ft_putnchar_fd(' ', 1, f->width - len - f->prec);
+	if (!f->left_allign && f->point && f-> prec > len)
+		f->tl += ft_putnchar_fd('0', 1, f->width - f->prec - len);
+	f->tl += ft_putnstr_fd(hashtag(f), 1, 2 * (f->hashtag && nbr && !f->zero));
+	f->tl += ft_puthex(nbr, f);
+	if (f->left_allign && f->width > len)
+		f->tl += ft_putnchar_fd(' ', 1, f->width - len);
+}
