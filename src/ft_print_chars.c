@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:17 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/28 17:48:26 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 20:55:55 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_print_string(t_print *f)
 	str = (const char *) va_arg(f->args, char *);
 	if (str == NULL)
 	{
-		if (f->point && (size_t)f->prec < ft_strlen("null"))
+		if (f->point && (size_t)f->prec < ft_strlen("(null)"))
 			str = "";
 		else
 			str = "(null)";
