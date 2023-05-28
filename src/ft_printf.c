@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:48:12 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/27 00:40:18 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 17:48:46 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,22 @@ static void	ft_choose_print_func(const char *str, t_print *f)
 		ft_print_string(f);
 	else if (*str == 'x' || *str == 'X')
 		ft_print_hex(f);
+	else if (*str == 'p')
+		ft_print_p(f);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	t_print a;
-	t_print *f;
-	int ret;
+	t_print	a;
+	t_print	*f;
+	int		ret;
 
 	f = &a;
 	ft_reset_t_print(f);
 	f->tl = 0;
 	va_start(f->args, str);
 	ret = 0;
-	while(*str)
+	while (*str)
 	{
 		if (*str != '%')
 			ret += write(1, str++, 1);

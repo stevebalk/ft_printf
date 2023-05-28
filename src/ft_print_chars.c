@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:17 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/28 15:18:58 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 17:48:26 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	ft_putnchar_fd(const char ch, int fd, int len)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < len)
 	{
@@ -30,7 +30,7 @@ int	ft_putnchar_fd(const char ch, int fd, int len)
 file descriptor and returns number of wrote chars*/
 int	ft_putnstr_fd(const char *str, int fd, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n && *str != '\0')
@@ -61,8 +61,8 @@ void	ft_print_char(t_print *f)
 /* Print formatted string */
 void	ft_print_string(t_print *f)
 {
-	const char *str;
-	int len;
+	const char	*str;
+	int			len;
 
 	str = (const char *) va_arg(f->args, char *);
 	if (str == NULL)
@@ -71,7 +71,6 @@ void	ft_print_string(t_print *f)
 			str = "";
 		else
 			str = "(null)";
-
 	}
 	len = ft_strlen(str);
 	if (f->point && len > f->prec)

@@ -6,13 +6,12 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:20:01 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/26 22:38:00 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 17:49:56 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
-#include <stdio.h>
 
 static	size_t	parse_precision(t_print *f, const char *str)
 {

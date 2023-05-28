@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:13:47 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/28 15:10:17 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 17:49:35 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@ void	ft_reset_t_print(t_print *f)
 	f->hashtag = 0;
 	f->set = 0;
 }
-
-// size_t	ft_putnbr_base(size_t nbr, char *base, size_t base_size, t_print *f)
-// {
-// 	size_t	rtn;
-//
-// 	rtn = 0;
-// 	if (nbr >= base_size)
-// 		rtn += ft_putnbr_base(nbr / base_size, base, base_size);
-// 	ft_putchar_fd(base[nbr % base_size], 1);
-// 	return (rtn + 1);
-// }
 
 char	*ft_uitoa(unsigned int nbr)
 {
@@ -65,7 +54,7 @@ char	*ft_uitoa(unsigned int nbr)
 	return (str);
 }
 
-int	ft_nbrlen(int nbr, int base)
+int	ft_nbrlen(long nbr, int base)
 {
 	int	len;
 
@@ -73,19 +62,4 @@ int	ft_nbrlen(int nbr, int base)
 	if (nbr >= base)
 		len += ft_nbrlen(nbr / base, base);
 	return (len + 1);
-}
-
-void print_debug_struct(t_print *f)
-{
-	printf("Speci = %c\n", f->speci);
-	printf("Width = %i\n", f->width);
-	printf("Zero  = %i\n", f->zero);
-	printf("Point = %i\n", f->point);
-	printf("LeftA = %i\n", f->left_allign);
-	printf("Sign  = %i\n", f->sign);
-	printf("Space = %i\n", f->space);
-	printf("HashT = %i\n", f->hashtag);
-	printf("Set   = %i\n", f->set);
-	printf("Total = %lu\n", f->tl);
-	fflush(stdout);
 }
