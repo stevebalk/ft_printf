@@ -6,17 +6,12 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:55 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/27 00:59:18 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 15:30:39 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
-
-// void	ft_print_x(t_print *f)
-// {
-
-// }
 
 static size_t	ft_puthex(size_t nbr, t_print *f)
 {
@@ -48,16 +43,21 @@ void	ft_print_hex(t_print *f)
 	len = ft_nbrlen(nbr, 16);
 	if (!nbr && f->point && !f->prec)
 		len = 0;
-	if (f->hashtag)
+	if (f->prec < 0 || f->prec < len || !f->point)
+		f->prec = len;
+	if (f->hashtag && nbr)
 		f->width -= 2;
-	if (!f->left_allign && f->width > len && !f->point)
-		f->tl += ft_putnchar_fd(' ', 1, f->width - len);
-	else if (!f->left_allign && f->width > len && f->point)
-		f->tl += ft_putnchar_fd(' ', 1, f->width - len - f->prec);
-	if (!f->left_allign && f->point && f-> prec > len)
-		f->tl += ft_putnchar_fd('0', 1, f->width - f->prec - len);
+	f->tl += ft_putnstr_fd(hashtag(f), 1, 2 * (f->hashtag && nbr && f->zero));
+	if (!f->left_allign && f->point && f-> prec && f->zero)
+		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
+	else if (!f->left_allign && !f->point && f->prec && f->zero)
+		f->tl += ft_putnchar_fd('0', 1, f->width - len);
+	else if (!f->left_allign && f->width > f->prec)
+		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
 	f->tl += ft_putnstr_fd(hashtag(f), 1, 2 * (f->hashtag && nbr && !f->zero));
-	f->tl += ft_puthex(nbr, f);
-	if (f->left_allign && f->width > len)
-		f->tl += ft_putnchar_fd(' ', 1, f->width - len);
+	f->tl += ft_putnchar_fd('0', 1, (f->prec - len)); 
+	if (len)
+		f->tl += ft_puthex(nbr, f);
+	if (f->left_allign && f->width > f->prec)
+		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
 }

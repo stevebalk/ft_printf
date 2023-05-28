@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 23:53:14 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/27 00:06:42 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 15:19:30 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ const char	*ft_eval_format(t_print *f, const char *str);
 int			ft_printf(const char *str, ...);
 
 /* UTILITY */
-size_t		ft_putnchar_fd(const char ch, int fd, size_t len);
-size_t		ft_putnstr_fd(const char *str, int fd, size_t n);
+int			ft_putnchar_fd(const char ch, int fd, int len);
+int			ft_putnstr_fd(const char *str, int fd, int n);
 char		*ft_uitoa(unsigned int nbr);
-size_t		ft_nbrlen(size_t nbr, size_t base);
+int			ft_nbrlen(int nbr, int base);
 
 // DEBUG //
 void		print_debug_struct(t_print *f);

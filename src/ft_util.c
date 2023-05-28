@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 15:13:47 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/27 00:05:22 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 15:10:17 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ char	*ft_uitoa(unsigned int nbr)
 	return (str);
 }
 
-size_t	ft_nbrlen(size_t nbr, size_t base)
+int	ft_nbrlen(int nbr, int base)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
 	if (nbr >= base)

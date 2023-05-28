@@ -6,16 +6,16 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:17 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/27 00:37:37 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/28 15:18:58 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-size_t	ft_putnchar_fd(const char ch, int fd, size_t len)
+int	ft_putnchar_fd(const char ch, int fd, int len)
 {
-	size_t	i;
+	int	i;
 	
 	i = 0;
 	while (i < len)
@@ -28,9 +28,9 @@ size_t	ft_putnchar_fd(const char ch, int fd, size_t len)
 
 /* Prints string until n-th size or '/0' to the given
 file descriptor and returns number of wrote chars*/
-size_t	ft_putnstr_fd(const char *str, int fd, size_t n)
+int	ft_putnstr_fd(const char *str, int fd, int n)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < n && *str != '\0')
