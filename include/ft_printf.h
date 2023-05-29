@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 23:53:14 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/28 21:05:14 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/29 11:47:35 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <limits.h>
 # include "libft.h"
 
 // 	args		= va_arg
