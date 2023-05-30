@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:55 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/28 21:07:57 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:53:11 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ static size_t	ft_puthex(size_t nbr, t_print *f)
 	return (rtn + 1);
 }
 
-static size_t	putp(size_t nbr, t_print *f)
-{
-	if (nbr == 0)
-	{
-		return (ft_putnstr_fd("(nil)", 1, 5));
-	}
-	else
-		return (ft_puthex(nbr, f));
-}
-
 static char	*hashtag(t_print *f)
 {
 	if (f->speci == 'X')
@@ -46,10 +36,10 @@ static char	*hashtag(t_print *f)
 
 void	ft_print_hex(t_print *f)
 {
-	unsigned long	nbr;
+	unsigned int	nbr;
 	int				len;
 
-	nbr = va_arg(f->args, unsigned long);
+	nbr = va_arg(f->args, unsigned int);
 	len = ft_nbrlen(nbr, 16);
 	if (!nbr && f->point && !f->prec)
 		len = 0;
@@ -74,27 +64,27 @@ void	ft_print_hex(t_print *f)
 
 void	ft_print_p(t_print *f)
 {
-	unsigned long	nbr;
-	int				len;
+	size_t	nbr;
+	int		len;
 
-	nbr = va_arg(f->args, unsigned long);
+	nbr = va_arg(f->args, size_t);
 	len = ft_nbrlen(nbr, 16);
-	if (!nbr)
-		len = 5;
+	if (nbr == ULONG_MAX)
+		len = 16;
 	if (f->prec < len || !f->point)
 		f->prec = len;
-	f->width -= 2 * (nbr != 0);
-	f->tl += ft_putnstr_fd("0x", 1, 2 * f->zero * (nbr != 0));
+	f->width -= 2;
+	f->tl += ft_putnstr_fd("0x", 1, 2 * f->zero);
 	if (!f->left_allign && f->point && f-> prec && f->zero)
 		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
 	else if (!f->left_allign && !f->point && f->prec && f->zero)
-		f->tl += ft_putnchar_fd('0', 1, f->prec - len * (nbr != 0));
+		f->tl += ft_putnchar_fd('0', 1, f->prec - len);
 	else if (!f->left_allign && f->width > f->prec)
 		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
-	f->tl += ft_putnstr_fd("0x", 1, 2 * !f->zero * (nbr != 0));
-	f->tl += ft_putnchar_fd('1', 1, (f->prec - len) * (nbr != 0));
+	f->tl += ft_putnstr_fd("0x", 1, 2 * !f->zero);
+	f->tl += ft_putnchar_fd('0', 1, f->prec - len);
 	if (len)
-		f->tl += putp(nbr, f);
+		f->tl += ft_puthex(nbr, f);
 	if (f->left_allign && f->width > f->prec)
 		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
 }

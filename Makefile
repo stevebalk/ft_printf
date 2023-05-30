@@ -6,7 +6,7 @@
 #    By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 11:26:00 by sbalk             #+#    #+#              #
-#    Updated: 2023/05/29 12:37:14 by sbalk            ###   ########.fr        #
+#    Updated: 2023/05/30 12:23:15 by sbalk            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJB 		= 	$(addprefix $(OBJB_DIR), $(addsuffix .o, $(SRCB_FILES)))
 
 OBJF		= .cache_exists
-OBJBF		= .cache_exists
+OBJBF		= .cache_existsgb
 
 all:		$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 23:53:14 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/29 11:47:35 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:44:05 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			ft_printf(const char *str, ...);
 int			ft_putnchar_fd(const char ch, int fd, int len);
 int			ft_putnstr_fd(const char *str, int fd, int n);
 char		*ft_uitoa(unsigned int nbr);
-int			ft_nbrlen(unsigned long nbr, unsigned long base);
+int			ft_nbrlen(unsigned long long nbr, int base);
 
 // PRINT FUNCTIONS
 
