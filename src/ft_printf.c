@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:48:12 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/28 17:48:46 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/06/01 16:23:14 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 static void	ft_choose_print_func(const char *str, t_print *f)
 {
 	f->speci = *str;
-	if (*str == 'c')
+	if (*str == 'c' || *str == '%')
 		ft_print_char(f);
-	else if (*str == '%')
-		f->tl += write(1, "%", 1);
 	else if (*str == 'd' || *str == 'i' || *str == 'u')
 		ft_print_d_i_u(f);
 	else if (*str == 's')

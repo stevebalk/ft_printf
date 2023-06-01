@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:17 by sbalk             #+#    #+#             */
-/*   Updated: 2023/05/30 13:22:47 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/06/01 16:21:46 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void	ft_print_char(t_print *f)
 {
 	int	ch;
 
-	ch = va_arg(f->args, int);
+	ch = '%';
+	if (f->speci != '%')
+		ch = va_arg(f->args, int);
 	if (f->left_allign)
 		f->tl += write(1, &ch, 1);
 	while (f->width > 1)
