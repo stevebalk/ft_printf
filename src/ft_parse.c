@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:20:01 by sbalk             #+#    #+#             */
-/*   Updated: 2023/06/01 15:32:29 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:46:44 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static	size_t	parse_precision(t_print *f, const char *str)
 	f->point = 1;
 	str++;
 	f->set = 0;
+	f->zero = 0;
 	while (!ft_strchr(SPECIFIERS, *str))
 	{
 		if (!f->set && ft_isdigit(*str))
@@ -70,7 +71,5 @@ const char	*ft_eval_format(t_print *f, const char *str)
 	}
 	if (*str == '.')
 			str += parse_precision(f, str);
-	if (f->point && f->zero)
-		f->zero = 0;
 	return (str);
 }

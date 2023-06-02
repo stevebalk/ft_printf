@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:55 by sbalk             #+#    #+#             */
-/*   Updated: 2023/06/01 16:16:34 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:41:34 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ void	ft_print_hex(t_print *f)
 	if (f->hashtag && nbr)
 		f->width -= 2;
 	f->tl += ft_putnstr_fd(hashtag(f), 1, 2 * (f->hashtag && nbr && f->zero));
-	if (!f->left_allign && f->point && f-> prec && f->zero)
-		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
-	else if (!f->left_allign && !f->point && f->prec && f->zero)
+	if (!f->left_allign && !f->point && f->prec && f->zero)
 		f->tl += ft_putnchar_fd('0', 1, f->width - len);
 	else if (!f->left_allign && f->width > f->prec)
 		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
@@ -75,9 +73,7 @@ void	ft_print_p(t_print *f)
 		f->prec = len;
 	f->width -= 2;
 	f->tl += ft_putnstr_fd("0x", 1, 2 * f->zero);
-	if (!f->left_allign && f->point && f-> prec && f->zero)
-		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
-	else if (!f->left_allign && !f->point && f->prec && f->zero)
+	if (!f->left_allign && !f->point && f->prec && f->zero)
 		f->tl += ft_putnchar_fd('0', 1, f->prec - len);
 	else if (!f->left_allign && f->width > f->prec)
 		f->tl += ft_putnchar_fd(' ', 1, f->width - f->prec);
