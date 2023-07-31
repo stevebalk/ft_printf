@@ -6,17 +6,17 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:04:27 by sbalk             #+#    #+#             */
-/*   Updated: 2023/06/01 16:28:49 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/07/31 12:03:44 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include	<stddef.h>
-# include	<limits.h>
-# include   <stdlib.h>
-# include	<unistd.h>
+# include <stddef.h>
+# include <limits.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {

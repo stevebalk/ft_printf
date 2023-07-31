@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:21:55 by sbalk             #+#    #+#             */
-/*   Updated: 2023/06/02 10:41:34 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/07/31 12:07:11 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static size_t	ft_puthex(size_t nbr, t_print *f)
 
 	rtn = 0;
 	if (nbr >= 16)
-			rtn += ft_puthex(nbr / 16, f);
+		rtn += ft_puthex(nbr / 16, f);
 	if (f->speci == 'X')
 		ft_putchar_fd(HEXAUP[nbr % 16], 1);
 	else

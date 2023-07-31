@@ -6,7 +6,7 @@
 /*   By: sbalk <sbalk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:20:01 by sbalk             #+#    #+#             */
-/*   Updated: 2023/06/02 10:46:44 by sbalk            ###   ########.fr       */
+/*   Updated: 2023/07/31 12:07:04 by sbalk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ const char	*ft_eval_format(t_print *f, const char *str)
 		str++;
 	}
 	if (*str == '.')
-			str += parse_precision(f, str);
+		str += parse_precision(f, str);
 	return (str);
 }
